@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>每日心理特征科普</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- 字体 -->
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@700;500;400&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0; padding: 0; background: #fff;
+      font-family: 'Noto Sans SC', 'Baloo 2', "PingFang SC", "微软雅黑", sans-serif;
+      min-height: 100vh;
+    }
+    body{ background: #fff; }
+    .container {
+      max-width: 560px;
+      margin: 60px auto 0 auto;
+      background: #fff;
+      border-radius: 32px;
+      box-shadow: 0 12px 38px 0 rgba(97, 118, 255, 0.07);
+      padding: 44px 44px 34px 44px;
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+      transition: box-shadow .18s;
+    }
+    .date-row {
+      text-align: right;
+      font-size: 1.18em;
+      color: #b6bed1;
+      letter-spacing: 1.4px;
+      font-weight: 600;
+      margin-bottom: 0.8em;
+      margin-top: -10px;
+      font-family: 'Baloo 2','Noto Sans SC',sans-serif;
+    }
+    .header {
+      display: flex; align-items: center; gap: 24px; margin-bottom: 8px;
+    }
+    .header-icon {
+      width: 78px; height: 78px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .header-title {
+      font-family: 'Baloo 2', 'Noto Sans SC', sans-serif;
+      font-size: 2.4em;
+      color: #384965;
+      font-weight: 900;
+      letter-spacing: 4px;
+      margin-bottom: 0.28em;
+    }
+    .tag {
+      display: inline-block;
+      background: linear-gradient(90deg,#f7f9fd 70%, #e4f5ff 100%);
+      color: #548be2;
+      border-radius: 16px;
+      font-size: 1.07em;
+      padding: 4px 22px;
+      margin-left: 12px;
+      font-weight: 700;
+      letter-spacing: 2px;
+    }
+    .tips {
+      background: #f2f7ff;
+      color: #7b98c6;
+      border-radius: 13px;
+      font-size: 1.11em;
+      padding: 5px 18px 5px 13px;
+      display: inline-block;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      margin-top: 4px;
+    }
+    .section {
+      margin-top: 7px;
+      margin-bottom: 6px;
+      padding: 25px 20px 19px 23px;
+      background: #fafbfe;
+      border-radius: 22px;
+      box-shadow: 0 2px 12px #b8bdf613;
+      position: relative;
+      font-size: 1.28em;
+    }
+    .section-title {
+      font-family: 'Noto Sans SC', 'Baloo 2', sans-serif;
+      color: #4488ef;
+      font-size: 1.16em;
+      margin-bottom: 13px;
+      letter-spacing: 1.7px;
+      font-weight: 700;
+      position: relative;
+    }
+    .section-title::before {
+      content: '';
+      display: inline-block;
+      width: 8px; height: 21px;
+      border-radius: 4px;
+      margin-right: 13px;
+      background: linear-gradient(120deg,#4488ef 50%,#b7e4ff 100%);
+      vertical-align: middle;
+    }
+    .section-content {
+      font-size: 1em;
+      color: #23324e;
+      line-height: 2.1;
+      font-family: "Noto Sans SC", "PingFang SC", "微软雅黑", sans-serif;
+      letter-spacing: 0.7px;
+      font-weight: 500;
+    }
+    ul {margin: 0 0 0 8px;}
+    li {margin-bottom: 7px;}
+    .next-section {
+      margin-top: 16px;
+      margin-bottom: 0;
+      padding: 17px 22px;
+      background: #f5faff;
+      border-radius: 20px;
+      box-shadow: 0 1px 7px #c7e8ff18;
+      font-size: 1.13em;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .next-icon {
+      width: 38px; height: 38px; flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .next-title {
+      color: #4499e5;
+      font-size: 1.03em;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      margin-bottom: 3px;
+      font-family: 'Baloo 2','Noto Sans SC',sans-serif;
+    }
+    .next-tips {
+      color: #4d6997;
+      font-size: 0.98em;
+      margin-top: 1px;
+      font-family: 'Noto Sans SC',sans-serif;
+      letter-spacing: 1px;
+    }
+    @media (max-width:700px){
+      .container{padding:7vw 3vw 6vw 3vw;max-width:100vw;}
+      .header-title{font-size:1.45em;}
+      .header-icon{width:55px;height:55px;}
+      .date-row{font-size:1em;}
+      .next-section{font-size:0.99em;}
+      .next-icon{width:28px;height:28px;}
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="date-row" id="dateRow"></div>
+    <!-- header区域，内容由JS动态渲染 -->
+    <div class="header">
+      <div class="header-icon" id="icon"></div>
+      <div>
+        <div class="header-title">
+          今日心理特征
+          <span class="tag" id="featureName"></span>
+        </div>
+        <div class="tips" id="slogan"></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="section-title">特征简介</div>
+      <div class="section-content" id="brief"></div>
+    </div>
+    <div class="section">
+      <div class="section-title">主要表现</div>
+      <div class="section-content" id="traits"></div>
+    </div>
+    <div class="section">
+      <div class="section-title">常见困扰</div>
+      <div class="section-content" id="troubles"></div>
+    </div>
+    <div class="section">
+      <div class="section-title">健康建议</div>
+      <div class="section-content" id="advice"></div>
+    </div>
+    <!-- 明日预告区 -->
+    <div class="next-section">
+      <div class="next-icon">
+        <!-- 箭头/日历SVG -->
+        <svg width="38" height="38" viewBox="0 0 38 38">
+          <circle cx="19" cy="19" r="19" fill="#e7f4ff"/>
+          <path d="M16 13l6 6-6 6" stroke="#4499e5" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="next-title">明日预告：<span id="nextName"></span></div>
+        <div class="next-tips" id="nextSlogan"></div>
+      </div>
+    </div>
+  </div>
+  <script>
+    // 心理特征数据
+    const features = [
+      {
+        name: "高敏感人格",
+        slogan: "—— 认识自我，友好相处",
+        icon: `<svg viewBox="0 0 68 68">
+          <circle cx="34" cy="34" r="31" fill="#ffe0ed"/>
+          <ellipse cx="34" cy="39" rx="20" ry="16" fill="#fff"/>
+          <ellipse cx="34" cy="27" rx="11" ry="9.5" fill="#ffedfb" />
+          <circle cx="34" cy="30" r="7" fill="#fcbadf" />
+          <ellipse cx="27" cy="37" rx="2" ry="1.5" fill="#fe7bb6"/>
+          <ellipse cx="41" cy="37" rx="2" ry="1.5" fill="#fe7bb6"/>
+          <path d="M22 21 Q23.5 18, 26 20 Q28.5 18, 30 21 Q31.5 25, 26 27 Q20.5 25, 22 21Z" fill="#fe7bb6" opacity="0.67"/>
+          <rect x="32.8" y="15" width="2.5" height="7.2" rx="1.1" fill="#ff76b3"/>
+          <ellipse cx="34" cy="23.7" rx="1.3" ry="1.2" fill="#ff76b3"/>
+        </svg>`,
+        brief: `<b>高敏感人格</b>（Highly Sensitive Person, HSP），指对外部环境和内心情绪特别敏感、共情能力极强的人群。他们更容易察觉细节，情绪波动更大，也更容易被外界影响。`,
+        traits: `<ul>
+          <li>情绪反应比一般人强烈，对别人的情绪很容易“感同身受”</li>
+          <li>在吵闹或拥挤的环境下容易疲惫，喜欢安静独处</li>
+          <li>对批评或冲突特别在意，经常反复思考和自责</li>
+          <li>对细节和氛围非常敏感，常能察觉别人没注意到的小事</li>
+        </ul>`,
+        troubles: `<ul>
+          <li>容易感到压力、焦虑和疲劳</li>
+          <li>常常因为想得太多而纠结，容易自我否定</li>
+          <li>在人际交往中，有时会感到力不从心或想逃避</li>
+        </ul>`,
+        advice: `<ul>
+          <li><b>学会自我接纳</b>：敏感不是缺点，接受自己和别人的不同。</li>
+          <li><b>适当表达情绪</b>：找到合适的方式和朋友倾诉，不压抑感受。</li>
+          <li><b>设置边界</b>：在人际关系中学会说“不”，保护自己的能量。</li>
+          <li><b>安排独处时间</b>：给自己留出安静休息的空间，调节情绪。</li>
+          <li><b>避免“讨好型”倾向</b>：尊重自己，不为别人感受而委屈自己。</li>
+        </ul>`
+      },
+      {
+        name: "完美主义人格",
+        slogan: "—— 拥抱不完美，温柔对待自己",
+        icon: `<svg viewBox="0 0 68 68">
+          <circle cx="34" cy="34" r="31" fill="#eaf7ff"/>
+          <ellipse cx="34" cy="40" rx="19" ry="16" fill="#fff"/>
+          <ellipse cx="34" cy="27" rx="10.5" ry="8.5" fill="#dbedfc" />
+          <ellipse cx="34" cy="29.5" rx="7.5" ry="6" fill="#b3e0fc"/>
+          <rect x="29" y="20" width="10" height="4" rx="2" fill="#7ac0fd" opacity="0.3"/>
+          <path d="M26 36 L34 44 L46 28" stroke="#33b3ff" stroke-width="2.4" fill="none" />
+        </svg>`,
+        brief: `<b>完美主义人格</b>，指追求极致、对自己和他人要求很高，总想做到“最好”的人。这类人注重细节，追求高标准，但有时会给自己和周围带来压力。`,
+        traits: `<ul>
+          <li>做事严谨，对细节要求高，力求完美</li>
+          <li>对自己的不足常常过度苛责，难以容忍失败</li>
+          <li>常觉得“不够好”，容易焦虑或自我怀疑</li>
+          <li>习惯将事情拖延到最满意才交付</li>
+        </ul>`,
+        troubles: `<ul>
+          <li>因标准过高导致压力大、难以放松</li>
+          <li>遇到小失误容易自责</li>
+          <li>工作学习常因追求极致而效率降低</li>
+        </ul>`,
+        advice: `<ul>
+          <li><b>允许“不完美”</b>：接受人生本就有遗憾和不足，允许自己偶尔犯错。</li>
+          <li><b>聚焦过程而非结果</b>：享受努力的过程，而不是盯着结果的好坏。</li>
+          <li><b>设立合理目标</b>：目标要可实现，避免无限拔高标准。</li>
+          <li><b>学会适当放手</b>：不必面面俱到，对自己宽容一些。</li>
+        </ul>`
+      },
+      {
+        name: "社交恐惧",
+        slogan: "—— 你并不孤单，慢慢来",
+        icon: `<svg viewBox="0 0 68 68">
+          <circle cx="34" cy="34" r="31" fill="#f0f8f7"/>
+          <ellipse cx="34" cy="42" rx="19" ry="15" fill="#fff"/>
+          <ellipse cx="34" cy="30" rx="9.5" ry="8" fill="#d1f4ef"/>
+          <ellipse cx="34" cy="32" rx="6" ry="5" fill="#a2e7db"/>
+          <path d="M26 45 Q34 53, 42 45" stroke="#38c7a3" stroke-width="2.2" fill="none"/>
+          <ellipse cx="27" cy="36" rx="2" ry="1.4" fill="#3ee1bc"/>
+          <ellipse cx="41" cy="36" rx="2" ry="1.4" fill="#3ee1bc"/>
+        </svg>`,
+        brief: `<b>社交恐惧</b>，是指在社交场合下感到紧张、害怕、担心被评价的一种心理状态。社恐并不等于内向，它可能是压力或成长经历的反应。`,
+        traits: `<ul>
+          <li>在陌生人面前容易脸红、出汗、心跳加速</li>
+          <li>害怕主动表达，常因紧张而结巴或语塞</li>
+          <li>常担心自己言行会被嘲笑或否定</li>
+          <li>社交后会反复回想自己的表现并自责</li>
+        </ul>`,
+        troubles: `<ul>
+          <li>回避聚会或公共场合，错过人脉和机会</li>
+          <li>长期自我否定，产生自卑心理</li>
+          <li>影响正常生活和学习，带来孤独感</li>
+        </ul>`,
+        advice: `<ul>
+          <li><b>温和暴露法</b>：慢慢增加与人互动的机会，每次挑战一点点。</li>
+          <li><b>接纳自己</b>：社恐不是缺点，也不会永远持续。</li>
+          <li><b>主动求助</b>：与信任的朋友、心理老师聊聊，寻求支持。</li>
+          <li><b>关注自身感受</b>：记录下每一次勇敢的突破，给自己鼓励。</li>
+        </ul>`
+      }
+      // 继续添加更多特征...
+    ];
+
+    // 获取今日和明日的特征索引
+    const todayIdx = new Date().getDate() % features.length;
+    const nextIdx = (new Date().getDate() + 1) % features.length;
+    const today = features[todayIdx], next = features[nextIdx];
+
+    // 填充DOM
+    document.getElementById('icon').innerHTML = today.icon;
+    document.getElementById('featureName').textContent = today.name;
+    document.getElementById('slogan').textContent = today.slogan;
+    document.getElementById('brief').innerHTML = today.brief;
+    document.getElementById('traits').innerHTML = today.traits;
+    document.getElementById('troubles').innerHTML = today.troubles;
+    document.getElementById('advice').innerHTML = today.advice;
+    document.getElementById('nextName').textContent = next.name;
+    document.getElementById('nextSlogan').textContent = next.slogan;
+
+    // 显示今日日期
+    function formatDate(dt) {
+      // 格式: 2025年8月2日 星期六
+      const weekdays = ['日','一','二','三','四','五','六'];
+      return `${dt.getFullYear()}年${dt.getMonth()+1}月${dt.getDate()}日 星期${weekdays[dt.getDay()]}`;
+    }
+    document.getElementById('dateRow').textContent = formatDate(new Date());
+  </script>
+</body>
+</html>
