@@ -1,326 +1,600 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <title>每日心理特征科普</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- 字体 -->
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@700&display=swap" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@700;500;400&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>留给春晚看 · 短视频投稿平台</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&family=Noto+Sans+SC:wght@400;500;700&display=swap" rel="stylesheet" />
   <style>
-    html, body {
-      margin: 0; padding: 0; background: #fff;
-      font-family: 'Noto Sans SC', 'Baloo 2', "PingFang SC", "微软雅黑", sans-serif;
-      min-height: 100vh;
+    :root {
+      color-scheme: dark;
+      --bg-deep: #3b0505;
+      --bg-mid: #8b0a0a;
+      --bg-gold: #f1b24a;
+      --card: rgba(30, 10, 10, 0.78);
+      --card-light: rgba(45, 12, 12, 0.7);
+      --gold: #ffd27d;
+      --red: #ff3d3d;
+      --text: #fff4e4;
+      --muted: rgba(255, 244, 228, 0.75);
+      --border: rgba(255, 210, 125, 0.25);
     }
-    body{ background: #fff; }
-    .container {
-      max-width: 560px;
-      margin: 60px auto 0 auto;
-      background: #fff;
-      border-radius: 32px;
-      box-shadow: 0 12px 38px 0 rgba(97, 118, 255, 0.07);
-      padding: 44px 44px 34px 44px;
+    * {
+      box-sizing: border-box;
+    }
+    html, body {
+      margin: 0;
+      min-height: 100%;
+      font-family: "Noto Sans SC", "ZCOOL KuaiLe", "PingFang SC", sans-serif;
+      color: var(--text);
+      background: radial-gradient(circle at top, rgba(255, 215, 120, 0.35), transparent 45%),
+        linear-gradient(135deg, var(--bg-deep), var(--bg-mid) 55%, var(--bg-gold));
+      overflow-x: hidden;
+    }
+    body {
+      position: relative;
+      padding-bottom: 120px;
+    }
+    #fireworks {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+    .page {
+      position: relative;
+      z-index: 1;
+      padding: 36px 6vw 80px;
       display: flex;
       flex-direction: column;
-      gap: 24px;
-      transition: box-shadow .18s;
+      gap: 32px;
     }
-    .date-row {
-      text-align: right;
-      font-size: 1.18em;
-      color: #b6bed1;
-      letter-spacing: 1.4px;
-      font-weight: 600;
-      margin-bottom: 0.8em;
-      margin-top: -10px;
-      font-family: 'Baloo 2','Noto Sans SC',sans-serif;
+    header {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 24px 28px;
+      background: rgba(55, 12, 12, 0.8);
+      border-radius: 28px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
     }
-    .header {
-      display: flex; align-items: center; gap: 24px; margin-bottom: 8px;
-    }
-    .header-icon {
-      width: 78px; height: 78px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .header-title {
-      font-family: 'Baloo 2', 'Noto Sans SC', sans-serif;
-      font-size: 2.4em;
-      color: #384965;
-      font-weight: 900;
-      letter-spacing: 4px;
-      margin-bottom: 0.28em;
-    }
-    .tag {
-      display: inline-block;
-      background: linear-gradient(90deg,#f7f9fd 70%, #e4f5ff 100%);
-      color: #548be2;
-      border-radius: 16px;
-      font-size: 1.07em;
-      padding: 4px 22px;
-      margin-left: 12px;
-      font-weight: 700;
-      letter-spacing: 2px;
-    }
-    .tips {
-      background: #f2f7ff;
-      color: #7b98c6;
-      border-radius: 13px;
-      font-size: 1.11em;
-      padding: 5px 18px 5px 13px;
-      display: inline-block;
-      font-weight: 500;
-      letter-spacing: 1.2px;
-      margin-top: 4px;
-    }
-    .section {
-      margin-top: 7px;
-      margin-bottom: 6px;
-      padding: 25px 20px 19px 23px;
-      background: #fafbfe;
-      border-radius: 22px;
-      box-shadow: 0 2px 12px #b8bdf613;
-      position: relative;
-      font-size: 1.28em;
-    }
-    .section-title {
-      font-family: 'Noto Sans SC', 'Baloo 2', sans-serif;
-      color: #4488ef;
-      font-size: 1.16em;
-      margin-bottom: 13px;
-      letter-spacing: 1.7px;
-      font-weight: 700;
-      position: relative;
-    }
-    .section-title::before {
-      content: '';
-      display: inline-block;
-      width: 8px; height: 21px;
-      border-radius: 4px;
-      margin-right: 13px;
-      background: linear-gradient(120deg,#4488ef 50%,#b7e4ff 100%);
-      vertical-align: middle;
-    }
-    .section-content {
-      font-size: 1em;
-      color: #23324e;
-      line-height: 2.1;
-      font-family: "Noto Sans SC", "PingFang SC", "微软雅黑", sans-serif;
-      letter-spacing: 0.7px;
-      font-weight: 500;
-    }
-    ul {margin: 0 0 0 8px;}
-    li {margin-bottom: 7px;}
-    .next-section {
-      margin-top: 16px;
-      margin-bottom: 0;
-      padding: 17px 22px;
-      background: #f5faff;
-      border-radius: 20px;
-      box-shadow: 0 1px 7px #c7e8ff18;
-      font-size: 1.13em;
+    .brand {
       display: flex;
       align-items: center;
       gap: 18px;
     }
-    .next-icon {
-      width: 38px; height: 38px; flex-shrink: 0;
-      display: flex; align-items: center; justify-content: center;
+    .brand-icon {
+      width: 68px;
+      height: 68px;
+      border-radius: 18px;
+      background: linear-gradient(150deg, #ffedc0, #ff7676);
+      display: grid;
+      place-items: center;
+      font-size: 32px;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+      color: #720000;
+      font-family: "ZCOOL KuaiLe", sans-serif;
     }
-    .next-title {
-      color: #4499e5;
-      font-size: 1.03em;
+    .brand h1 {
+      font-family: "ZCOOL KuaiLe", sans-serif;
+      font-size: clamp(26px, 3vw, 38px);
+      margin: 0;
+      letter-spacing: 2px;
+    }
+    .brand p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    .login-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn {
+      border: none;
+      border-radius: 999px;
+      padding: 10px 20px;
       font-weight: 700;
-      letter-spacing: 1.4px;
-      margin-bottom: 3px;
-      font-family: 'Baloo 2','Noto Sans SC',sans-serif;
-    }
-    .next-tips {
-      color: #4d6997;
-      font-size: 0.98em;
-      margin-top: 1px;
-      font-family: 'Noto Sans SC',sans-serif;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      font-family: "ZCOOL KuaiLe", sans-serif;
       letter-spacing: 1px;
     }
-    @media (max-width:700px){
-      .container{padding:7vw 3vw 6vw 3vw;max-width:100vw;}
-      .header-title{font-size:1.45em;}
-      .header-icon{width:55px;height:55px;}
-      .date-row{font-size:1em;}
-      .next-section{font-size:0.99em;}
-      .next-icon{width:28px;height:28px;}
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+    }
+    .btn-wechat {
+      background: linear-gradient(135deg, #22c55e, #86efac);
+      color: #062f16;
+    }
+    .btn-qq {
+      background: linear-gradient(135deg, #3b82f6, #93c5fd);
+      color: #0a1f44;
+    }
+    .btn-ghost {
+      background: transparent;
+      border: 1px solid var(--border);
+      color: var(--text);
+    }
+    .user-card {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 12px 18px;
+      border-radius: 18px;
+      background: var(--card);
+      border: 1px solid var(--border);
+    }
+    .avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #fbbf24, #f97316);
+      display: grid;
+      place-items: center;
+      font-family: "ZCOOL KuaiLe", sans-serif;
+      color: #4c1d1d;
+      font-size: 22px;
+    }
+    .user-info strong {
+      display: block;
+      font-size: 16px;
+    }
+    .user-info span {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    main {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.8fr);
+      gap: 28px;
+    }
+    .panel {
+      background: var(--card);
+      border-radius: 24px;
+      padding: 24px;
+      border: 1px solid var(--border);
+      box-shadow: 0 18px 40px rgba(0, 0, 0, 0.3);
+    }
+    .panel h2 {
+      font-family: "ZCOOL KuaiLe", sans-serif;
+      margin: 0 0 16px;
+      font-size: 22px;
+      letter-spacing: 1px;
+    }
+    .panel p {
+      margin: 0 0 16px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+    .highlight {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255, 210, 125, 0.15);
+      font-size: 13px;
+      border: 1px solid rgba(255, 210, 125, 0.3);
+    }
+    .upload-form {
+      display: grid;
+      gap: 14px;
+    }
+    label {
+      font-size: 14px;
+      color: var(--muted);
+    }
+    input, textarea, select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(15, 7, 7, 0.7);
+      color: var(--text);
+      font-family: "Noto Sans SC", sans-serif;
+    }
+    textarea {
+      resize: vertical;
+      min-height: 90px;
+    }
+    .form-row {
+      display: grid;
+      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    }
+    .submit-btn {
+      background: linear-gradient(135deg, #ffb20f, #ff4d4d);
+      color: #3b0a0a;
+      border: none;
+      border-radius: 16px;
+      padding: 12px 18px;
+      font-weight: 800;
+      font-family: "ZCOOL KuaiLe", sans-serif;
+      cursor: pointer;
+      letter-spacing: 1px;
+    }
+    .feed {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+    .post-card {
+      background: var(--card-light);
+      border-radius: 20px;
+      padding: 20px;
+      border: 1px solid var(--border);
+      display: grid;
+      gap: 14px;
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .post-title {
+      font-size: 18px;
+      font-weight: 700;
+    }
+    .post-meta {
+      font-size: 12px;
+      color: var(--muted);
+    }
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .tag {
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      font-size: 12px;
+    }
+    .post-link {
+      color: #ffe69b;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    .post-link:hover {
+      text-decoration: underline;
+    }
+    .comments {
+      display: grid;
+      gap: 10px;
+    }
+    .comment {
+      padding: 10px 12px;
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 12px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+    .comment strong {
+      color: var(--text);
+    }
+    .comment-form {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .comment-form input {
+      flex: 1;
+    }
+    .comment-form button {
+      padding: 10px 16px;
+      border-radius: 12px;
+      background: rgba(255, 210, 125, 0.2);
+      color: var(--text);
+      border: 1px solid rgba(255, 210, 125, 0.4);
+      cursor: pointer;
+    }
+    .profile-editor {
+      display: grid;
+      gap: 10px;
+    }
+    footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 960px) {
+      main {
+        grid-template-columns: 1fr;
+      }
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .page {
+        padding: 24px 5vw 60px;
+      }
+      .brand-icon {
+        width: 56px;
+        height: 56px;
+      }
+      .btn {
+        width: 100%;
+        justify-content: center;
+        text-align: center;
+      }
+      .login-actions {
+        width: 100%;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="date-row" id="dateRow"></div>
-    <!-- header区域，内容由JS动态渲染 -->
-    <div class="header">
-      <div class="header-icon" id="icon"></div>
-      <div>
-        <div class="header-title">
-          今日心理特征
-          <span class="tag" id="featureName"></span>
+  <canvas id="fireworks"></canvas>
+  <div class="page">
+    <header>
+      <div class="brand">
+        <div class="brand-icon">春</div>
+        <div>
+          <h1>留给春晚看 · 投稿乐园</h1>
+          <p>上传你最有年味的短视频、抖音、综艺高光，一起在这里热闹“云围观”。</p>
         </div>
-        <div class="tips" id="slogan"></div>
       </div>
-    </div>
-    <div class="section">
-      <div class="section-title">特征简介</div>
-      <div class="section-content" id="brief"></div>
-    </div>
-    <div class="section">
-      <div class="section-title">主要表现</div>
-      <div class="section-content" id="traits"></div>
-    </div>
-    <div class="section">
-      <div class="section-title">常见困扰</div>
-      <div class="section-content" id="troubles"></div>
-    </div>
-    <div class="section">
-      <div class="section-title">健康建议</div>
-      <div class="section-content" id="advice"></div>
-    </div>
-    <!-- 明日预告区 -->
-    <div class="next-section">
-      <div class="next-icon">
-        <!-- 箭头/日历SVG -->
-        <svg width="38" height="38" viewBox="0 0 38 38">
-          <circle cx="19" cy="19" r="19" fill="#e7f4ff"/>
-          <path d="M16 13l6 6-6 6" stroke="#4499e5" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-        </svg>
+      <div class="login-actions" id="loginArea">
+        <button class="btn btn-wechat" data-provider="微信">微信登录</button>
+        <button class="btn btn-qq" data-provider="QQ">QQ 登录</button>
       </div>
-      <div>
-        <div class="next-title">明日预告：<span id="nextName"></span></div>
-        <div class="next-tips" id="nextSlogan"></div>
+      <div class="user-card" id="userCard" hidden>
+        <div class="avatar" id="avatar">春</div>
+        <div class="user-info">
+          <strong id="username">春晚观众</strong>
+          <span id="userId">ID: CNY2024</span>
+        </div>
+        <button class="btn btn-ghost" id="editProfile">编辑</button>
       </div>
-    </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <h2>投稿区 · 留给春晚看的快乐时刻</h2>
+        <p>填写你的视频介绍、链接或上传说明，支持直接跳转到抖音/综艺/短视频平台。登录后即可发布与评论。</p>
+        <div class="highlight">🎆 春晚元素 · 喜庆 · 好玩 · 互动评论</div>
+        <form class="upload-form" id="uploadForm">
+          <div>
+            <label>内容标题</label>
+            <input type="text" id="titleInput" placeholder="比如：龙年小品爆笑混剪" required />
+          </div>
+          <div>
+            <label>视频介绍</label>
+            <textarea id="descInput" placeholder="描述亮点、推荐理由或观看感受" required></textarea>
+          </div>
+          <div class="form-row">
+            <div>
+              <label>链接地址</label>
+              <input type="url" id="linkInput" placeholder="https://" required />
+            </div>
+            <div>
+              <label>视频类型</label>
+              <select id="typeInput">
+                <option>短视频</option>
+                <option>抖音</option>
+                <option>综艺节目</option>
+                <option>春晚片段</option>
+              </select>
+            </div>
+          </div>
+          <div>
+            <label>封面/视频文件（可选）</label>
+            <input type="file" id="fileInput" accept="video/*" />
+          </div>
+          <button class="submit-btn" type="submit">一键发布</button>
+        </form>
+      </section>
+
+      <section class="panel">
+        <h2>我的资料</h2>
+        <p>登录后会自动生成默认头像和 ID，你可以随时修改昵称或头像文字。</p>
+        <div class="profile-editor">
+          <div>
+            <label>昵称</label>
+            <input type="text" id="nicknameInput" placeholder="春晚观众" />
+          </div>
+          <div>
+            <label>头像文字</label>
+            <input type="text" id="avatarInput" placeholder="春" maxlength="2" />
+          </div>
+          <button class="btn btn-ghost" id="saveProfile">保存资料</button>
+        </div>
+      </section>
+
+      <section class="panel" style="grid-column: span 2;">
+        <h2>热闹广场 · 投稿动态</h2>
+        <div class="feed" id="feed">
+          <article class="post-card">
+            <div class="post-header">
+              <div>
+                <div class="post-title">《小品合辑：春晚笑点时刻》</div>
+                <div class="post-meta">发布者：春晚迷妹 · 23:18</div>
+              </div>
+              <span class="tag">综艺节目</span>
+            </div>
+            <p>今年小品里的金句太密集了！整理了几个爆笑片段，适合全家一起看。</p>
+            <div class="post-tags">
+              <span class="tag">#爆笑</span>
+              <span class="tag">#阖家欢乐</span>
+            </div>
+            <a class="post-link" href="https://v.douyin.com" target="_blank" rel="noreferrer">点击跳转观看</a>
+            <div class="comments">
+              <div class="comment"><strong>年味值拉满：</strong> 笑到停不下来～</div>
+              <form class="comment-form">
+                <input type="text" placeholder="留下你的评论" />
+                <button type="submit">评论</button>
+              </form>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer>🎇 春晚元素 + 烟花特效，祝你投稿玩得开心！</footer>
   </div>
+
   <script>
-    // 心理特征数据
-    const features = [
-      {
-        name: "高敏感人格",
-        slogan: "—— 认识自我，友好相处",
-        icon: `<svg viewBox="0 0 68 68">
-          <circle cx="34" cy="34" r="31" fill="#ffe0ed"/>
-          <ellipse cx="34" cy="39" rx="20" ry="16" fill="#fff"/>
-          <ellipse cx="34" cy="27" rx="11" ry="9.5" fill="#ffedfb" />
-          <circle cx="34" cy="30" r="7" fill="#fcbadf" />
-          <ellipse cx="27" cy="37" rx="2" ry="1.5" fill="#fe7bb6"/>
-          <ellipse cx="41" cy="37" rx="2" ry="1.5" fill="#fe7bb6"/>
-          <path d="M22 21 Q23.5 18, 26 20 Q28.5 18, 30 21 Q31.5 25, 26 27 Q20.5 25, 22 21Z" fill="#fe7bb6" opacity="0.67"/>
-          <rect x="32.8" y="15" width="2.5" height="7.2" rx="1.1" fill="#ff76b3"/>
-          <ellipse cx="34" cy="23.7" rx="1.3" ry="1.2" fill="#ff76b3"/>
-        </svg>`,
-        brief: `<b>高敏感人格</b>（Highly Sensitive Person, HSP），指对外部环境和内心情绪特别敏感、共情能力极强的人群。他们更容易察觉细节，情绪波动更大，也更容易被外界影响。`,
-        traits: `<ul>
-          <li>情绪反应比一般人强烈，对别人的情绪很容易“感同身受”</li>
-          <li>在吵闹或拥挤的环境下容易疲惫，喜欢安静独处</li>
-          <li>对批评或冲突特别在意，经常反复思考和自责</li>
-          <li>对细节和氛围非常敏感，常能察觉别人没注意到的小事</li>
-        </ul>`,
-        troubles: `<ul>
-          <li>容易感到压力、焦虑和疲劳</li>
-          <li>常常因为想得太多而纠结，容易自我否定</li>
-          <li>在人际交往中，有时会感到力不从心或想逃避</li>
-        </ul>`,
-        advice: `<ul>
-          <li><b>学会自我接纳</b>：敏感不是缺点，接受自己和别人的不同。</li>
-          <li><b>适当表达情绪</b>：找到合适的方式和朋友倾诉，不压抑感受。</li>
-          <li><b>设置边界</b>：在人际关系中学会说“不”，保护自己的能量。</li>
-          <li><b>安排独处时间</b>：给自己留出安静休息的空间，调节情绪。</li>
-          <li><b>避免“讨好型”倾向</b>：尊重自己，不为别人感受而委屈自己。</li>
-        </ul>`
-      },
-      {
-        name: "完美主义人格",
-        slogan: "—— 拥抱不完美，温柔对待自己",
-        icon: `<svg viewBox="0 0 68 68">
-          <circle cx="34" cy="34" r="31" fill="#eaf7ff"/>
-          <ellipse cx="34" cy="40" rx="19" ry="16" fill="#fff"/>
-          <ellipse cx="34" cy="27" rx="10.5" ry="8.5" fill="#dbedfc" />
-          <ellipse cx="34" cy="29.5" rx="7.5" ry="6" fill="#b3e0fc"/>
-          <rect x="29" y="20" width="10" height="4" rx="2" fill="#7ac0fd" opacity="0.3"/>
-          <path d="M26 36 L34 44 L46 28" stroke="#33b3ff" stroke-width="2.4" fill="none" />
-        </svg>`,
-        brief: `<b>完美主义人格</b>，指追求极致、对自己和他人要求很高，总想做到“最好”的人。这类人注重细节，追求高标准，但有时会给自己和周围带来压力。`,
-        traits: `<ul>
-          <li>做事严谨，对细节要求高，力求完美</li>
-          <li>对自己的不足常常过度苛责，难以容忍失败</li>
-          <li>常觉得“不够好”，容易焦虑或自我怀疑</li>
-          <li>习惯将事情拖延到最满意才交付</li>
-        </ul>`,
-        troubles: `<ul>
-          <li>因标准过高导致压力大、难以放松</li>
-          <li>遇到小失误容易自责</li>
-          <li>工作学习常因追求极致而效率降低</li>
-        </ul>`,
-        advice: `<ul>
-          <li><b>允许“不完美”</b>：接受人生本就有遗憾和不足，允许自己偶尔犯错。</li>
-          <li><b>聚焦过程而非结果</b>：享受努力的过程，而不是盯着结果的好坏。</li>
-          <li><b>设立合理目标</b>：目标要可实现，避免无限拔高标准。</li>
-          <li><b>学会适当放手</b>：不必面面俱到，对自己宽容一些。</li>
-        </ul>`
-      },
-      {
-        name: "社交恐惧",
-        slogan: "—— 你并不孤单，慢慢来",
-        icon: `<svg viewBox="0 0 68 68">
-          <circle cx="34" cy="34" r="31" fill="#f0f8f7"/>
-          <ellipse cx="34" cy="42" rx="19" ry="15" fill="#fff"/>
-          <ellipse cx="34" cy="30" rx="9.5" ry="8" fill="#d1f4ef"/>
-          <ellipse cx="34" cy="32" rx="6" ry="5" fill="#a2e7db"/>
-          <path d="M26 45 Q34 53, 42 45" stroke="#38c7a3" stroke-width="2.2" fill="none"/>
-          <ellipse cx="27" cy="36" rx="2" ry="1.4" fill="#3ee1bc"/>
-          <ellipse cx="41" cy="36" rx="2" ry="1.4" fill="#3ee1bc"/>
-        </svg>`,
-        brief: `<b>社交恐惧</b>，是指在社交场合下感到紧张、害怕、担心被评价的一种心理状态。社恐并不等于内向，它可能是压力或成长经历的反应。`,
-        traits: `<ul>
-          <li>在陌生人面前容易脸红、出汗、心跳加速</li>
-          <li>害怕主动表达，常因紧张而结巴或语塞</li>
-          <li>常担心自己言行会被嘲笑或否定</li>
-          <li>社交后会反复回想自己的表现并自责</li>
-        </ul>`,
-        troubles: `<ul>
-          <li>回避聚会或公共场合，错过人脉和机会</li>
-          <li>长期自我否定，产生自卑心理</li>
-          <li>影响正常生活和学习，带来孤独感</li>
-        </ul>`,
-        advice: `<ul>
-          <li><b>温和暴露法</b>：慢慢增加与人互动的机会，每次挑战一点点。</li>
-          <li><b>接纳自己</b>：社恐不是缺点，也不会永远持续。</li>
-          <li><b>主动求助</b>：与信任的朋友、心理老师聊聊，寻求支持。</li>
-          <li><b>关注自身感受</b>：记录下每一次勇敢的突破，给自己鼓励。</li>
-        </ul>`
+    const loginArea = document.getElementById("loginArea");
+    const userCard = document.getElementById("userCard");
+    const username = document.getElementById("username");
+    const userId = document.getElementById("userId");
+    const avatar = document.getElementById("avatar");
+    const nicknameInput = document.getElementById("nicknameInput");
+    const avatarInput = document.getElementById("avatarInput");
+    const saveProfile = document.getElementById("saveProfile");
+    const editProfile = document.getElementById("editProfile");
+    const uploadForm = document.getElementById("uploadForm");
+    const feed = document.getElementById("feed");
+
+    const randomId = () => `CNY${Math.floor(1000 + Math.random() * 9000)}`;
+
+    loginArea.addEventListener("click", (event) => {
+      const button = event.target.closest("button");
+      if (!button) return;
+      const provider = button.dataset.provider;
+      loginArea.hidden = true;
+      userCard.hidden = false;
+      const newId = randomId();
+      userId.textContent = `ID: ${newId}`;
+      username.textContent = `${provider}用户`;
+      avatar.textContent = provider === "微信" ? "微" : "Q";
+      nicknameInput.value = username.textContent;
+      avatarInput.value = avatar.textContent;
+    });
+
+    const applyProfile = () => {
+      if (!nicknameInput.value.trim()) return;
+      username.textContent = nicknameInput.value.trim();
+      avatar.textContent = avatarInput.value.trim() || avatar.textContent;
+    };
+
+    saveProfile.addEventListener("click", applyProfile);
+    editProfile.addEventListener("click", () => {
+      nicknameInput.focus();
+    });
+
+    uploadForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const title = document.getElementById("titleInput").value.trim();
+      const desc = document.getElementById("descInput").value.trim();
+      const link = document.getElementById("linkInput").value.trim();
+      const type = document.getElementById("typeInput").value;
+      if (!title || !desc || !link) return;
+      const now = new Date();
+      const time = `${now.getHours().toString().padStart(2, "0")}:${now.getMinutes().toString().padStart(2, "0")}`;
+      const author = username.textContent || "游客";
+
+      const card = document.createElement("article");
+      card.className = "post-card";
+      card.innerHTML = `
+        <div class="post-header">
+          <div>
+            <div class="post-title">${title}</div>
+            <div class="post-meta">发布者：${author} · ${time}</div>
+          </div>
+          <span class="tag">${type}</span>
+        </div>
+        <p>${desc}</p>
+        <div class="post-tags">
+          <span class="tag">#留给春晚看</span>
+          <span class="tag">#节日快乐</span>
+        </div>
+        <a class="post-link" href="${link}" target="_blank" rel="noreferrer">点击跳转观看</a>
+        <div class="comments">
+          <div class="comment"><strong>热度小助手：</strong> 第一条评论等你来！</div>
+          <form class="comment-form">
+            <input type="text" placeholder="留下你的评论" />
+            <button type="submit">评论</button>
+          </form>
+        </div>
+      `;
+      feed.prepend(card);
+      uploadForm.reset();
+    });
+
+    feed.addEventListener("submit", (event) => {
+      if (!event.target.classList.contains("comment-form")) return;
+      event.preventDefault();
+      const input = event.target.querySelector("input");
+      const text = input.value.trim();
+      if (!text) return;
+      const comment = document.createElement("div");
+      comment.className = "comment";
+      comment.innerHTML = `<strong>${username.textContent || "游客"}：</strong> ${text}`;
+      event.target.parentElement.insertBefore(comment, event.target);
+      input.value = "";
+    });
+
+    const canvas = document.getElementById("fireworks");
+    const ctx = canvas.getContext("2d");
+    const particles = [];
+
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    const colors = ["#ffd27d", "#ff4d4d", "#fbbf24", "#fde68a", "#f97316"];
+
+    const createFirework = () => {
+      const x = Math.random() * canvas.width;
+      const y = Math.random() * canvas.height * 0.6;
+      const count = 24 + Math.floor(Math.random() * 20);
+      const color = colors[Math.floor(Math.random() * colors.length)];
+      for (let i = 0; i < count; i += 1) {
+        particles.push({
+          x,
+          y,
+          radius: Math.random() * 2 + 1,
+          color,
+          angle: Math.random() * Math.PI * 2,
+          speed: Math.random() * 2 + 1.5,
+          alpha: 1,
+        });
       }
-      // 继续添加更多特征...
-    ];
+    };
 
-    // 获取今日和明日的特征索引
-    const todayIdx = new Date().getDate() % features.length;
-    const nextIdx = (new Date().getDate() + 1) % features.length;
-    const today = features[todayIdx], next = features[nextIdx];
+    const animate = () => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      for (let i = particles.length - 1; i >= 0; i -= 1) {
+        const p = particles[i];
+        p.x += Math.cos(p.angle) * p.speed;
+        p.y += Math.sin(p.angle) * p.speed;
+        p.alpha -= 0.012;
+        p.speed *= 0.98;
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+        ctx.globalAlpha = p.alpha;
+        ctx.beginPath();
+        ctx.fillStyle = p.color;
+        ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+      requestAnimationFrame(animate);
+    };
 
-    // 填充DOM
-    document.getElementById('icon').innerHTML = today.icon;
-    document.getElementById('featureName').textContent = today.name;
-    document.getElementById('slogan').textContent = today.slogan;
-    document.getElementById('brief').innerHTML = today.brief;
-    document.getElementById('traits').innerHTML = today.traits;
-    document.getElementById('troubles').innerHTML = today.troubles;
-    document.getElementById('advice').innerHTML = today.advice;
-    document.getElementById('nextName').textContent = next.name;
-    document.getElementById('nextSlogan').textContent = next.slogan;
-
-    // 显示今日日期
-    function formatDate(dt) {
-      // 格式: 2025年8月2日 星期六
-      const weekdays = ['日','一','二','三','四','五','六'];
-      return `${dt.getFullYear()}年${dt.getMonth()+1}月${dt.getDate()}日 星期${weekdays[dt.getDay()]}`;
-    }
-    document.getElementById('dateRow').textContent = formatDate(new Date());
+    setInterval(createFirework, 900);
+    createFirework();
+    animate();
   </script>
 </body>
 </html>
